@@ -1,40 +1,38 @@
 import string
 import random
 
+# Step 1: Ask for password length
 length = int(input("Enter password length: "))
 
-print("""Choose character set from this list:
-        1. Digits
-        2. Letters
-        3. Special Characters
-        4. Done selecting character types""")
+# Step 2: Show character type options
+print("""Choose character types to include in your password:
+        1. Digits (0–9)
+        2. Letters (a–z, A–Z)
+        3. Special Characters (!@#$...)
 
-characterList = ""
+Enter your choices separated by spaces (e.g. 1 2 3): """)
 
-while True:
-    choice = int(input("Pick a number: "))
-    if choice == 1:
-        characterList += string.digits
-        print("✔ Digits added.")
-    elif choice == 2:
-        characterList += string.ascii_letters
-        print("✔ Letters added.")
-    elif choice == 3:
-        characterList += string.punctuation
-        print("✔ Special characters added.")
-    elif choice == 4:
-        if characterList == "":
-            print("❌ You haven't selected any character types yet!")
-        else:
-            break
+# Step 3: Get multiple choices from user
+choices = input("Your choices: ").split()
+
+# Step 4: Build character list based on selection
+character_list = ""
+
+for choice in choices:
+    if choice == '1':
+        character_list += string.digits
+    elif choice == '2':
+        character_list += string.ascii_letters
+    elif choice == '3':
+        character_list += string.punctuation
     else:
-        print("Please pick a valid option!")
+        print(f"'{choice}' is not a valid option.")
 
-password = []
-
-for i in range(length):
-    randomchar = random.choice(characterList)
-    password.append(randomchar)
-
-print(f"\n🔐 The random password is: {''.join(password)}")
+# Step 5: Validate selection
+if not character_list:
+    print("No valid character types selected. Exiting.")
+else:
+    # Step 6: Generate password
+    password = [random.choice(character_list) for _ in range(length)]
+    print("\nYour generated password is:", ''.join(password))
 
