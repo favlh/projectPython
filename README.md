@@ -1,2 +1,1 @@
-# projectPython
-my mini project with python
+Mini project that created using python
